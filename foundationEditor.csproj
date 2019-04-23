@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5671B4A7-FDD9-4134-B03B-0D1652ECA02A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>foundationEditor</RootNamespace>
+    <AssemblyName>foundationEditor</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;UNITY_EDITOR</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;UNITY_5_6,UNITY_5_4_OR_NEWER,UNITY_5_6_OR_NEWER</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEditor">
+      <HintPath>..\foundation\libs\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>..\foundation\libs\UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\foundation\libs\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\foundation\libs\UnityEngine.UI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\foundationEditor\core\EditorCallLater.cs" />
+    <Compile Include="src\foundationEditor\core\EditorCore.cs" />
+    <Compile Include="src\foundationEditor\core\EditorResourceUtils.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\AnimatorControllerCreater.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\AvatarPreviewSelection.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\PreviewCameraDrawLineBounds.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\PreviewSystem.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\resolve\AbstractCopyResolve.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\resolve\PathComponentRecord.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\resolve\SpringBoneResolve.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\resolve\SpringManagerResolve.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\TimeControl.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\utils\PrefabCopy2Utility.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\utils\PrefabCopyUtility.cs" />
+    <Compile Include="src\foundationEditor\findScriptReference\FindScriptReference.cs" />
+    <Compile Include="src\foundationEditor\findScriptReference\MissGameObjectRef.cs" />
+    <Compile Include="src\foundationEditor\findScriptReference\MissingInSceneFinder.cs" />
+    <Compile Include="src\foundationEditor\nav\ExportTerrain.cs" />
+    <Compile Include="src\foundationEditor\nav\HeightMap.cs" />
+    <Compile Include="src\foundationEditor\prefabEditor\ProjectPrefabWindow.cs" />
+    <Compile Include="src\foundationEditor\prefabEditor\ui\PrefabItemRender.cs" />
+    <Compile Include="src\foundationEditor\prefabEditor\ui\ProjectPrefabSearchList.cs" />
+    <Compile Include="src\foundationEditor\prefabExport\ExportPrefabRefVO.cs" />
+    <Compile Include="src\foundationEditor\prefabExport\ExportRootVO.cs" />
+    <Compile Include="src\foundationEditor\prefabExport\ExportSceneAssetsRefVO.cs" />
+    <Compile Include="src\foundationEditor\RagdollEditor\LYRagdollWindow.cs" />
+    <Compile Include="src\foundationEditor\sceneEditor\SceneAutoSave.cs" />
+    <Compile Include="src\foundationEditor\sceneEditor\SceneCFGEditor.cs" />
+    <Compile Include="src\foundationEditor\sceneEditor\SceneCFGInspector.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\eventui\CameraMoveUI.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\eventui\CameraShakeUI.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\eventui\EffectCreateUI.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\eventui\EmptyEventUI.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\eventui\FlashShowEventUI.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\eventui\GhostEffectEventUI.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\eventui\IEventUI.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\eventui\MoveUI.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\eventui\PlayAnimUI.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\eventui\PlaySoundUI.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\eventui\SetAnimationBoolUI.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\eventui\SkillUseEventUI.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\eventui\TimeScaleUI.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\eventui\TrigerEventUI.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\SkillEditor.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\strack\BaseTrack.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\strack\EffectTrack.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\strack\ITrack.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\ui\ModelWindow.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\ui\PropertyWindow.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\ui\SearchList.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\ui\TimeLine.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\ui\TimeWindow.cs" />
+    <Compile Include="src\foundationEditor\skillEditor\vo\DataSource.cs" />
+    <Compile Include="src\foundationEditor\utils\EditorGUIUtilityExt.cs" />
+    <Compile Include="src\foundationEditor\window\gui\EditorPlayControlBar.cs" />
+    <Compile Include="src\foundationInspector\HypertextInspector.cs" />
+    <Compile Include="src\foundationInspector\AnimationPath\AnimationPathPoint.cs" />
+    <Compile Include="src\foundationInspector\AnimationPath\AnimationPathSceneGUI.cs" />
+    <Compile Include="src\foundationInspector\AnimationPath\AnimationWindowReflect.cs" />
+    <Compile Include="src\foundationInspector\AnimationPath\AnimationWindowUtil.cs" />
+    <Compile Include="src\foundationInspector\AnimationPath\CurveUtil.cs" />
+    <Compile Include="src\foundationInspector\DirectorExtEditor.cs" />
+    <Compile Include="src\foundationInspector\ObjectSelector\EditorCache.cs" />
+    <Compile Include="src\foundationInspector\ObjectSelector\EditorGUIUtil.cs" />
+    <Compile Include="src\foundationInspector\ObjectSelector\EditorWrapper.cs" />
+    <Compile Include="src\foundationInspector\ObjectSelector\ObjectSelectorWindow.cs" />
+    <Compile Include="src\foundationInspector\ObjectSelector\PreviewResizer.cs" />
+    <Compile Include="src\foundationInspector\PlayMakerTriggerInspector.cs" />
+    <Compile Include="src\foundationInspector\PointsCFGInspector.cs" />
+    <Compile Include="src\foundationInspector\PathsCFGInspector.cs" />
+    <Compile Include="src\foundationInspector\PolygonImageInspector.cs" />
+    <Compile Include="src\foundationInspector\TextureRefInspector.cs" />
+    <Compile Include="src\foundationInspector\SpriteRefInspector.cs" />
+    <Compile Include="src\foundationInspector\TeamSpawersCFGInspector.cs" />
+    <Compile Include="src\foundationInspector\UIMateriaFloatMotionInspector.cs" />
+    <Compile Include="src\foundationPropertyDrawer\ExcelIDSelecterDrawer.cs" />
+    <Compile Include="src\foundationPropertyDrawer\ObjectSelecterDrawer.cs" />
+    <Compile Include="src\foundationInspector\UITweenPositionXInspector.cs" />
+    <Compile Include="src\foundationPropertyDrawer\ReorderableDrawer.cs" />
+    <Compile Include="src\foundationPropertyDrawer\SetPropertyDrawer.cs" />
+    <Compile Include="src\foundationWizard\GenerateStaticCubemap.cs" />
+    <Compile Include="src\foundationWizard\ReplacePngWindow.cs" />
+    <Compile Include="src\foundationEditor\core\AvatarBoneDrawHelper.cs" />
+    <Compile Include="src\foundationInspector\AnimationClipExtEditor.cs" />
+    <Compile Include="src\foundationInspector\BoundariesCFGInspector.cs" />
+    <Compile Include="src\foundationInspector\DecoratorEditor.cs" />
+    <Compile Include="src\foundationEditor\core\PlayAnimationEditor.cs" />
+    <Compile Include="src\foundationEditor\core\PlayParticleSystemEditor.cs" />
+    <Compile Include="src\foundationInspector\SpawersCFGInspector.cs" />
+    <Compile Include="src\foundationInspector\TransformAnimatorInspector.cs" />
+    <Compile Include="src\foundationInspector\UnitCFGInspector.cs" />
+    <Compile Include="src\foundationInspector\TransformExtInspector.cs" />
+    <Compile Include="src\foundationEditor\newbieEditor\CullingMaskEditor.cs" />
+    <Compile Include="src\foundationWizard\PictureEditor.cs" />
+    <Compile Include="src\foundationWizard\CopyZip2StreamAsset.cs" />
+    <Compile Include="src\foundationEditor\core\EditorConfigUtils.cs" />
+    <Compile Include="src\foundationInspector\extractor\AnimationCurveExtractor.cs" />
+    <Compile Include="src\foundationPropertyDrawer\BetterAnimationCurveFieldDrawer.cs" />
+    <Compile Include="src\foundationPropertyDrawer\DisableDrawer.cs" />
+    <Compile Include="src\foundationPropertyDrawer\PathSelecterDrawer.cs" />
+    <Compile Include="src\foundationPropertyDrawer\ReorderableListDrawer.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\FBXWindow.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\AvatarPreview.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\ui\FBXItemRender.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\ui\ModelSearchList.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\utils\AnimationClipCreater.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\utils\BoneUtil.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\vo\FBXInfo.cs" />
+    <Compile Include="src\foundationEditor\flashui\FlashUI.cs" />
+    <Compile Include="src\foundationWizard\BuildPrefabWindow.cs" />
+    <Compile Include="src\foundationWizard\CheckAssetWindow.cs" />
+    <Compile Include="src\foundationEditor\findMissReplace\FileIDUtils.cs" />
+    <Compile Include="src\foundationEditor\findMissReplace\FindMissHelper.cs" />
+    <Compile Include="src\foundationEditor\findMissReplace\PrefabFileRefGet.cs" />
+    <Compile Include="src\foundationEditor\findMissReplace\SaveGUIDMap.cs" />
+    <Compile Include="src\foundationEditor\nav\NavObjectData.cs" />
+    <Compile Include="src\foundationEditor\prefabExport\PrefabExport.cs" />
+    <Compile Include="src\foundationEditor\core\PrefabModificationHook.cs" />
+    <Compile Include="src\foundationEditor\prefabExport\ProjectBuildSettings.cs" />
+    <Compile Include="src\foundationPropertyDrawer\ToolsExtends.cs" />
+    <Compile Include="src\foundationEditor\UICodeExport.cs" />
+    <Compile Include="src\foundationEditor\UIToolEditor.cs" />
+    <Compile Include="src\foundationEditor\upkEditor\ImageTextEditor.cs" />
+    <Compile Include="src\foundationEditor\upkEditor\UpkAniVOEditor.cs" />
+    <Compile Include="src\foundationEditor\upkEditor\UpkEditor.cs" />
+    <Compile Include="src\foundationEditor\utils\BuiltInResourcesWindow.cs" />
+    <Compile Include="src\foundationEditor\core\EditorTickManager.cs" />
+    <Compile Include="src\foundationEditor\utils\GameObjectUtils.cs" />
+    <Compile Include="src\foundationEditor\utils\NGUIEditorTools.cs" />
+    <Compile Include="src\foundationEditor\utils\NGUIMath.cs" />
+    <Compile Include="src\foundationEditor\utils\PrefabVersionCheck.cs" />
+    <Compile Include="src\foundationEditor\fbxEditor\ConfigUI.cs" />
+    <Compile Include="src\foundationEditor\utils\ScenePreview.cs" />
+    <Compile Include="src\foundationInspector\AnimatorClipRefInspector.cs" />
+    <Compile Include="src\foundationInspector\InspectorToolExtends.cs" />
+    <Compile Include="src\foundationInspector\UITweenAlphaInspector.cs" />
+    <Compile Include="src\foundationInspector\UITweenColorInspector.cs" />
+    <Compile Include="src\foundationInspector\UITweenerInspector.cs" />
+    <Compile Include="src\foundationInspector\UITweenPositionInspector.cs" />
+    <Compile Include="src\foundationInspector\UITweenRotationInspector.cs" />
+    <Compile Include="src\foundationInspector\UITweenScaleInspector.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\foundationEditor\window\BaseEditorWindow.cs" />
+    <Compile Include="src\foundationInspector\BaseInspector.cs" />
+    <Compile Include="src\foundationEditor\window\gui\EditorLabel.cs" />
+    <Compile Include="src\foundationEditor\window\gui\EditorPageList.cs" />
+    <Compile Include="src\foundationEditor\window\gui\EditorUI.cs" />
+    <Compile Include="src\foundationEditor\window\gui\EditorUtils.cs" />
+    <Compile Include="src\foundationEditor\window\gui\itemRender\EditorBaseItemRender.cs" />
+    <Compile Include="src\foundationEditor\window\utils\BoundsContrl.cs" />
+    <Compile Include="src\foundationEditor\window\utils\EditorList.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\foundation\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Slate\AlembicIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\BorderShadows.png" />
+    <EmbeddedResource Include="Resources\Slate\BottomShadow.png" />
+    <EmbeddedResource Include="Resources\Slate\CarretIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\CarretInIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\CarretOutIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\ClipBox.png" />
+    <EmbeddedResource Include="Resources\Slate\ClipBoxFooter.png" />
+    <EmbeddedResource Include="Resources\Slate\ClipBoxHorizontal.png" />
+    <EmbeddedResource Include="Resources\Slate\ClockIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\CurveIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\Cutscene Gizmo.png" />
+    <EmbeddedResource Include="Resources\Slate\Cutscene Icon.png" />
+    <EmbeddedResource Include="Resources\Slate\CutsceneIconClose.png" />
+    <EmbeddedResource Include="Resources\Slate\CutsceneIconOpen.png" />
+    <EmbeddedResource Include="Resources\Slate\DopeKey.png" />
+    <EmbeddedResource Include="Resources\Slate\DopeKeyConstant.png" />
+    <EmbeddedResource Include="Resources\Slate\DopeKeyLinear.png" />
+    <EmbeddedResource Include="Resources\Slate\DopeKeySmooth.png" />
+    <EmbeddedResource Include="Resources\Slate\GearIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\HeaderBoxImage.png" />
+    <EmbeddedResource Include="Resources\Slate\KeyIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\LoopIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\NextKeyIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\PauseIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\PlayIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\PlayReverseIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\PlusIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\PreviousKeyIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\RecordIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\SLATEIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\StepIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\StepReverseIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\StopIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\TrashIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Slate\StyleSheet.guiskin" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Path\Icons\controlpoints 1.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\controlpoints.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\delay 1.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\delay.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\easecurves 1.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\easecurves.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\events 1.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\events.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\fov 1.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\fov.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\logoDual400.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\logoDual401.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\options 1.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\options.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\orientation 1.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\orientation.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\pathpoints 1.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\pathpoints.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\speed 1.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\speed.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\tilt 1.png" />
+    <EmbeddedResource Include="Resources\Path\Icons\tilt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\SkillEditor\5frame.png" />
+    <EmbeddedResource Include="Resources\SkillEditor\bg.png" />
+    <EmbeddedResource Include="Resources\SkillEditor\blankPoint.png" />
+    <EmbeddedResource Include="Resources\SkillEditor\tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.backButton.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.backIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.backIcon_indie.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.bb10Icon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.breakIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.breakpointOff.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.breakpointOn.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.broadcastIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.broadcastIcon_indie.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.browseIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.browseIcon_indie.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.browserIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.browserIcon_indie.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.darkPreviewBg.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.deleteIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.deleteIcon_indie.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.divider.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.dividerSequence.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.downIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.downIcon_indie.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.dropShadowBox.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.errorBox.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.errorCount.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.errorIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.errorSpacer.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.forwardIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.forwardIcon_indie.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.globalArrow.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.globalTransitionBox.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.globalTransitionBox_indie.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.graphBackground.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.graphBackground_indie.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.helpIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.hintBox.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.infoBox.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.infoBox_indie.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.innerGlowBox.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.innerShadowBox.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.leftArrow.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.line.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.linkAddons.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.linkBasics.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.linkDocs.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.linkForums.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.linkSamples.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.linkVideos.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.logEntryBox.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.logErrorIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.logInfoIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.logTransitionIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.logWarningIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.metroIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.minimapIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.minimapIcon_indie.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.noErrors.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.outerGlow.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.pasteDivider.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.pauseButton.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.pauseIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.photonIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.playButton.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.playIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.playMakerBeta.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.playMakerHeader.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.playMakerLogo.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.playMakerWatermark.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.recentIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.recentIcon_indie.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.rightArrow.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.selectedColor.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.selectedColor_indie.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.selectionRect.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.settingsIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.settingsIcon_indie.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.singlePixelFrame.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.smallLeftArrow.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.smallRightArrow.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.startArrow.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.startTransitionBox.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.startTransitionBox_indie.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.stateBox.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.stateTitleBox.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.stateTitleBox_flat.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.stepButton.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.swatchBox.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.tableRowBox.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.timelineBar.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.transitionBox.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.transitionBoxSelected.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.upIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.upIcon_indie.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.variableIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.variableIcon_indie.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.wanIcon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.wanLarge.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.whiteVertical.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.wp8Icon.png" />
+    <EmbeddedResource Include="Resources\Playmaker\Playmaker.source.unity.Assets.PlayMaker.Editor.Resources.yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Slate\ExpressionIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\HiddenIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\HollowFrame.png" />
+    <EmbeddedResource Include="Resources\Slate\HollowFrameHorizontal.png" />
+    <EmbeddedResource Include="Resources\Slate\LockIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\MagnetIcon.png" />
+    <Content Include="Resources\Slate\PingPongIcon.png" />
+    <EmbeddedResource Include="Resources\Slate\Stripes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\foundationEditor\prefabEditor\vo\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\foundation\foundation.csproj">
+      <Project>{255f900a-800f-444f-ba8f-a301fa329de2}</Project>
+      <Name>foundation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gameSDK\gameSDK.csproj">
+      <Project>{81fb7e7d-6239-4165-99ac-7d8b170c9411}</Project>
+      <Name>gameSDK</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"$(ProjectDir)\pdb2mdb" "$(TargetPath)"
+copy "$(TargetPath)" "$(SolutionDir)\Assets\Editor\"
+copy "$(TargetDir)\$(TargetFileName).mdb" "$(SolutionDir)\Assets\Editor\"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
