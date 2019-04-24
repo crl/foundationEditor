@@ -7,10 +7,11 @@ using UnityEngine;
 
 namespace foundationEditor
 {
-    [CustomEditor(typeof (UnitCFG))]
+    //[CustomEditor(typeof(UnitCFG))]
     [CanEditMultipleObjects]
     public class UnitCFGInspector : BaseInspector<UnitCFG>
     {
+        private object renderer;
         private static bool isShowBone = false;
         private bool isAnimatorInStage = false;
         private int selectedHashCode;
@@ -25,8 +26,13 @@ namespace foundationEditor
         {
             base.OnEnable();
 
+            if (renderer == null)
+            {
+                renderer = AvatarBoneDrawHelper.NewBoneRenderer();
+            }
+
             SerializedProperty p = serializedObject.FindProperty("textureSets");
-            replaceTexturesList = new ReorderableList(serializedObject,p,true, true, true, true);
+            replaceTexturesList = new ReorderableList(serializedObject, p, true, true, true, true);
 
             replaceTexturesList.drawHeaderCallback = (Rect rect) =>
             {
@@ -53,7 +59,7 @@ namespace foundationEditor
                     textuRelative, GUIContent.none);
 
                 var keyRelative = element.FindPropertyRelative("index");
-                EditorGUI.PropertyField(new Rect(rect.x+width, rect.y, 80, EditorGUIUtility.singleLineHeight),
+                EditorGUI.PropertyField(new Rect(rect.x + width, rect.y, 80, EditorGUIUtility.singleLineHeight),
                     keyRelative, GUIContent.none);
 
                 GUI.color = Color.white;
@@ -65,7 +71,7 @@ namespace foundationEditor
             }
             animator = mTarget.GetComponent<Animator>();
 
-            isAnimatorInStage = go.activeInHierarchy && animator!=null;
+            isAnimatorInStage = go.activeInHierarchy && animator != null;
             transform = go.transform;
 
             modelBones = AvatarBoneDrawHelper.GetModelBones(transform);
@@ -84,7 +90,7 @@ namespace foundationEditor
                 }
             }
 
-            if (animationClips.Count == 0 && animator!=null)
+            if (animationClips.Count == 0 && animator != null)
             {
                 if (animator.runtimeAnimatorController != null)
                 {
@@ -119,7 +125,7 @@ namespace foundationEditor
         protected override void drawInspectorGUI()
         {
             mTarget.nameY = EditorGUILayout.FloatField("名字位置:", mTarget.nameY);
-            mTarget.unitType = (UnitType) EditorGUILayout.EnumPopup("类型", (Enum) mTarget.unitType);
+            mTarget.unitType = (UnitType)EditorGUILayout.EnumPopup("类型", (Enum)mTarget.unitType);
             mTarget.configID = EditorGUILayout.TextField("配置id", mTarget.configID);
             mTarget.strArgs = EditorGUILayout.TextField("字符串参数", mTarget.strArgs);
             mTarget.baseY = EditorGUILayout.FloatField("基位置:", mTarget.baseY);
@@ -160,7 +166,7 @@ namespace foundationEditor
             v = getWorldByLocal(v);
 
             Handles.color = Color.red;
-            Handles.CubeHandleCap(0, v, Quaternion.identity, size,Event.current.type);
+            Handles.CubeHandleCap(0, v, Quaternion.identity, size, Event.current.type);
             v.y -= 0.1f;
 
             if (UnitType.Start != mTarget.unitType)
@@ -174,7 +180,7 @@ namespace foundationEditor
 
             if (isShowBone)
             {
-                AvatarBoneDrawHelper.DrawSkeleton(transform, modelBones);
+                AvatarBoneDrawHelper.DrawSkeleton(transform, modelBones, renderer);
                 Color oldColor = Color.green;
 
                 Color color = Color.green;
@@ -211,12 +217,12 @@ namespace foundationEditor
 
                     float ss = HandleUtility.GetHandleSize(bone.position) * controlSize;
 
-                     Handles.FreeMoveHandle(bone.position, bone.localRotation, ss / 2, Vector3.zero,
-                        (controlID, p, rotation, s, eventType) =>
-                        {
-                            zoomHosControl[i] = controlID;
-                            Handles.SphereHandleCap(controlID, p, rotation, s, eventType);
-                        });
+                    Handles.FreeMoveHandle(bone.position, bone.localRotation, ss / 2, Vector3.zero,
+                       (controlID, p, rotation, s, eventType) =>
+                       {
+                           zoomHosControl[i] = controlID;
+                           Handles.SphereHandleCap(controlID, p, rotation, s, eventType);
+                       });
 
                     if (GUIUtility.hotControl != 0)
                     {

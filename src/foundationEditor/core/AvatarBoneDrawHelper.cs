@@ -4,6 +4,7 @@ using System.Reflection;
 using foundation;
 using UnityEditor;
 using UnityEngine;
+using Object = System.Object;
 
 namespace foundationEditor
 {
@@ -12,24 +13,29 @@ namespace foundationEditor
         private static MethodInfo GetModelBonesMethod;
         private static MethodInfo DrawSkeletonMethod;
         private static MethodInfo GetHumanBonesMethod;
+
+        private static Type BoneRendererType;
         static AvatarBoneDrawHelper()
         {
-            Type AvatarSetupTool = foundation.ObjectFactory.Locate("UnityEditor.AvatarSetupTool");
-            GetHumanBonesMethod = AvatarSetupTool.GetMethod("GetHumanBones",
-                BindingFlags.Static | BindingFlags.Public);
+            Type type = foundation.ObjectFactory.Locate("UnityEditor.AvatarSetupTool");
+            GetHumanBonesMethod = type.GetMethod("GetHumanBones", new Type[] { typeof(SerializedObject), typeof(Dictionary<Transform, bool>) });
+            GetModelBonesMethod = type.GetMethod("GetModelBones", BindingFlags.Static | BindingFlags.Public);
 
-            GetModelBonesMethod = AvatarSetupTool.GetMethod("GetModelBones",
-            BindingFlags.Static | BindingFlags.Public);
-
-
-            Type AvatarSkeletonDrawer = foundation.ObjectFactory.Locate("UnityEditor.AvatarSkeletonDrawer");
-            DrawSkeletonMethod = AvatarSkeletonDrawer.GetMethod("DrawSkeleton",new Type[]
+            BoneRendererType = foundation.ObjectFactory.Locate("UnityEditor.Handles.BoneRenderer");
+            type = foundation.ObjectFactory.Locate("UnityEditor.AvatarSkeletonDrawer");
+            DrawSkeletonMethod = type.GetMethod("DrawSkeleton", new Type[]
             {
-                typeof(Transform),typeof(Dictionary<Transform, bool>)
+                typeof(Transform),typeof(Dictionary<Transform, bool>),BoneRendererType
             });
         }
 
-        public static Dictionary<Transform,bool> GetModelBones(Transform transform, bool includeAll=true,object o=null)
+        public static Object NewBoneRenderer()
+        {
+            return Activator.CreateInstance(BoneRendererType);
+
+        }
+
+        public static Dictionary<Transform, bool> GetModelBones(Transform transform, bool includeAll = true, object o = null)
         {
             try
             {
@@ -38,7 +44,7 @@ namespace foundationEditor
             }
             catch (Exception ex)
             {
-                Debug.LogWarning("GetModelBones:"+ex.Message);
+                Debug.LogWarning("GetModelBones:" + ex.Message);
             }
 
 
@@ -49,7 +55,7 @@ namespace foundationEditor
         {
             try
             {
-                object a = GetHumanBonesMethod.Invoke(null, new object[] {serializedObject, modelBones});
+                object a = GetHumanBonesMethod.Invoke(null, new object[] { serializedObject, modelBones });
                 return a;
             }
             catch (Exception ex)
@@ -60,11 +66,11 @@ namespace foundationEditor
             return null;
         }
 
-        public static void DrawSkeleton(Transform reference, Dictionary<Transform, bool> actualBones)
+        public static void DrawSkeleton(Transform reference, Dictionary<Transform, bool> actualBones, object renderer)
         {
             if (actualBones != null)
             {
-                DrawSkeletonMethod.Invoke(null, new object[] {reference, actualBones});
+                DrawSkeletonMethod.Invoke(null, new object[] { reference, actualBones, renderer });
             }
         }
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace foundationEditor
 {
-    internal class AvatarPreviewSelection : ScriptableSingleton<AvatarPreviewSelection>
+    public class AvatarPreviewSelection : ScriptableSingleton<AvatarPreviewSelection>
     {
         // Fields
         [SerializeField]
